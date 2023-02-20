@@ -1,0 +1,42 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Movie List";
+}
+
+@model List<ApplicationResponse>
+
+<table class="table table-bordered table-hover table-striped">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>Title</td>
+            <td>Category</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent to</td>
+            <td>Notes</td>
+
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var z in Model)
+            {
+        <tr >
+            <td>@z.Title</td>
+            <td>@z.Category.CategoryName</td>
+            <td>@z.Year</td>
+            <td>@z.Director</td>
+            <td>@z.Rating</td>
+            <td>@z.Edited</td>
+            <td>@z.Lent</td>
+            <td>@z.Notes</td>
+            <td><a asp-controller="Home" asp-action="Edit" asp-route-applicationid="@z.ApplicationId">Edit</a></td>
+            <td><a asp-controller="Home" asp-action="Delete" asp-route-applicationid="@z.ApplicationId">Delete</a> </td>
+        </tr>
+            }
+    </tbody>
+</table>

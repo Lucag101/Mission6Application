@@ -9,6 +9,7 @@
 
 
 
+
 <div class="text-center">
     <h1 class="display-4">Add Movies</h1>
     <p></p>
@@ -18,8 +19,16 @@
         <input asp-for="Title" />
 
         <br />
-        <label asp-for="Category">Category:</label>
-        <input asp-for="Category" />
+        <label asp-for="CategoryId">Category:</label>
+        <select asp-for="CategoryId">
+            <option value="">Select a Category</option>
+            @foreach (Category c in ViewBag.Category)
+            {
+                <option value="@c.CategoryID">@c.CategoryName</option>
+            }
+            
+        </select>
+
 
         <br />
         <label asp-for="Year">Year:</label>

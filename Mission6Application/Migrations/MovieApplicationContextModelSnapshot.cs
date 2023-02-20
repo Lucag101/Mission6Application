@@ -21,9 +21,8 @@ namespace Mission6Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +51,15 @@ namespace Mission6Application.Migrations
 
                     b.HasKey("ApplicationId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("responses");
 
                     b.HasData(
                         new
                         {
                             ApplicationId = 1,
-                            Category = "Fantasy",
+                            CategoryId = 1,
                             Director = "Not sure",
                             Edited = true,
                             Lent = "Sarah Mackinley",
@@ -70,7 +71,7 @@ namespace Mission6Application.Migrations
                         new
                         {
                             ApplicationId = 2,
-                            Category = "Thriller",
+                            CategoryId = 6,
                             Director = "Again,Not sure",
                             Edited = false,
                             Lent = "",
@@ -82,7 +83,7 @@ namespace Mission6Application.Migrations
                         new
                         {
                             ApplicationId = 3,
-                            Category = "Fantasy",
+                            CategoryId = 1,
                             Director = "I feel like I should know, but I don't",
                             Edited = true,
                             Lent = "I would never lend this to anybody",
@@ -91,6 +92,81 @@ namespace Mission6Application.Migrations
                             Title = "Lord Of the Rings",
                             Year = 2006
                         });
+                });
+
+            modelBuilder.Entity("Mission6Application.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Category");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Sci-Fi/ Fantasy"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Children"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Thriller"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Horror"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Action"
+                        },
+                        new
+                        {
+                            CategoryID = 6,
+                            CategoryName = "Suspense"
+                        },
+                        new
+                        {
+                            CategoryID = 7,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 8,
+                            CategoryName = "Romance"
+                        },
+                        new
+                        {
+                            CategoryID = 9,
+                            CategoryName = "Holiday"
+                        },
+                        new
+                        {
+                            CategoryID = 10,
+                            CategoryName = "Animated"
+                        });
+                });
+
+            modelBuilder.Entity("Mission6Application.Models.ApplicationResponse", b =>
+                {
+                    b.HasOne("Mission6Application.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

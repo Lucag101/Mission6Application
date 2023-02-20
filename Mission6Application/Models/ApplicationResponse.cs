@@ -15,8 +15,6 @@ namespace Mission6Application.Models
         [Required]
         public string Title { get; set; }
         [Required] 
-        public string Category { get; set; }
-        [Required] 
         public int Year { get; set; }
         [Required] 
         public string Director { get; set; }
@@ -28,5 +26,12 @@ namespace Mission6Application.Models
         [MaxLength(25)]
         public string Notes { get; set; }
         
+        // how to build foreign key relationship
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
+        // [Required]
+        //public string Category { get; set; }
+
     }
 }
